@@ -2,9 +2,7 @@ from src.category import Category
 from src.product import Product
 from src.read_json import read_json
 
-products = read_json(
-    "C:/Users/Admin/PycharmProjects/my_prj/ProjectOOP/data/products.json"
-)
+products = read_json("C:/Users/Admin/PycharmProjects/my_prj/ProjectOOP/data/products.json")
 product_list = []
 for i in products:
     for j in i["products"]:
