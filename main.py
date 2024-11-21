@@ -1,3 +1,28 @@
+from src.category import Category
+from src.product import Product
+from src.read_json import read_json
+
+products = read_json("C:/Users/Admin/PycharmProjects/my_prj/ProjectOOP/data/products.json")
+product_list = []
+for i in products:
+    for j in i["products"]:
+        product = Product(j["name"], j["description"], j["price"], j["quantity"])
+
+        print(product.name)
+        print(product.description)
+        print(product.price)
+        print(product.quantity)
+        product_list.append(j)
+    print(product_list)
+    category = Category(i["name"], i["description"], product_list)
+
+    print(category.name)
+    print(category.description)
+    print(len(category.products))
+    print(category.category_count)
+    print(category.product_count)
+    print(category.products)
+
 # if __name__ == "__main__":
 #     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
 #     product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
@@ -18,9 +43,10 @@
 #     print(product3.price)
 #     print(product3.quantity)
 #
-#     category1 = Category("Смартфоны",
-#                          "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
-#                          [product1, product2, product3])
+#     category1 = Category(
+#     "Смартфоны",
+#     "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+#     [product1, product2, product3])
 #
 #     print(category1.name == "Смартфоны")
 #     print(category1.description)
@@ -29,9 +55,10 @@
 #     print(category1.product_count)
 #
 #     product4 = Product("55\" QLED 4K", "Фоновая подсветка", 123000.0, 7)
-#     category2 = Category("Телевизоры",
-#                          "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
-#                          [product4])
+#     category2 = Category(
+#     "Телевизоры",
+#     "Современный телевизор, который позволяет наслаждаться просмотром, станет вашим другом и помощником",
+#     [product4])
 #
 #     print(category2.name)
 #     print(category2.description)
@@ -39,4 +66,4 @@
 #     print(category2.products)
 #
 #     print(Category.category_count)
-#     print(Category.product_count
+#     print(Category.product_count)
