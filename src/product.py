@@ -1,35 +1,45 @@
-# class Product:
-#     """Класс продуктов."""
-#     name: str
-#     description: str
-#     price: float
-#     quantity: int
-#
-#
-#     def __init__(self, name, description, price, quantity):
-#         """Метод для инициализации экземпляра класса."""
-#         """Задаем значения атрибутам экземпляра."""
-#         self.name = name
-#         self.description = description
-#         self.price = price
-#         self.quantity = quantity
+from typing import Any
 
 
-from src.category import Category
-
-
-class Product(Category):
-    """Дочерний класс от Класса категорий: Класс продуктов."""
+class Product:
 
     name: str
     description: str
     price: float
     quantity: int
 
-    def __init__(self, name: str, description: str, price: float, quantity: int) -> None:
-        """Метод для инициализации экземпляра класса."""
-        """Задаем значения атрибутам экземпляра."""
+    def __init__(self, name, description, price, quantity):
         self.name = name
         self.description = description
-        self.price = price
+        self.__price = price
         self.quantity = quantity
+
+    @classmethod
+    def new_product(cls, dict_product, products=None):
+        if products:
+            for product in products:
+                if product.name == dict_product["name"]:
+                    product.quantity += dict_product["quantity"]
+                    product.price = max([product.price, dict_product["price"]])
+                    return product
+        return cls(
+            dict_product["name"],
+            dict_product["description"],
+            dict_product["price"],
+            dict_product["quantity"],
+        )
+
+    @property
+    def price(self):
+        return self.__price
+
+    @price.setter
+    def price(self, price: float):
+        if price <= 0:
+            print("Цена не должна быть нулевая или отрицательная")
+            return
+        if price < self.__price:
+            check_input = input("Изменять цену? Введите y если да,и n если нет.\n")
+            if check_input != "y":
+                return
+        self.__price = price
