@@ -1,26 +1,23 @@
 import json
-from json import JSONDecodeError
+import os
 
-# from typing import Any
-# from src.external_api import currency_conversion
+from src.category import Category
+from src.product import Product
 
 
-def read_json(path_to_file: str) -> list:
-    """Функция принимает на вход путь до JSON-файла и возвращает список словарей с данными о
-    продуктах."""
-    try:
-        print(f"Получение данных из файла {path_to_file}")
-        with open(path_to_file, encoding="utf-8") as products_file:
-            try:
-                products_json = json.load(products_file)
-            except JSONDecodeError:
-                print("Ошибка файла с продуктами")
-                return []
-        if not isinstance(products_json, list):
-            print("Список продуктов пуст")
-            return []
-        print("Список словарей с данными о продуктах")
-        return products_json
-    except FileNotFoundError:
-        print("Файл с продуктами не найден")
-        return []
+def read_json(path: str) -> dict:
+    full_path = os.path.abspath(path)
+    with open(full_path, "r", encoding="UTF-8") as file:
+        data = json.load(file)
+    return data
+
+
+def create_objects_from_json(data):
+    category = []
+    for product in data:
+        products = []
+        for product_list in product["products"]:
+            products.append(Product(**product_list))
+        product["products"] = products
+        category.append(Category(**product))
+    return category
