@@ -10,6 +10,11 @@ def first_product():
 
 
 @pytest.fixture
+def second_product():
+    return Product("LG VK69662N", "Цвет красный, Мощность 1800", 6999.99, 10)
+
+
+@pytest.fixture
 def for_category():
     return Category(
         name="Бытовая техника",

@@ -15,3 +15,7 @@ def test_products_property(for_category):
         for_category.products
         == "Samsung SC4140V3A, 7376.0 руб. Остаток: 5 шт.\nLG VK69662N, 6999.99 руб. Остаток: 10 шт.\n"
     )
+
+
+def test_str_category(for_category):
+    assert str(for_category) == "Бытовая техника, количество продуктов: 15 шт."
