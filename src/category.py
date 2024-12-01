@@ -16,8 +16,11 @@ class Category:
         Category.count_of_categories += 1
 
     def add_product(self, product: Product):
-        self.__products.append(product)
-        Category.count_of_products += 1
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.count_of_products += 1
+        else:
+            raise TypeError
 
     def __str__(self):
         products_in_stock = 0
@@ -29,7 +32,7 @@ class Category:
     def products(self):
         products_str = ""
         for product in self.__products:
-            products_str += f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.\n"
+            products_str += f"{str(product)}\n"
         return products_str
 
     @property
