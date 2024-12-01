@@ -34,3 +34,11 @@ def test_product_2_init(product_2: list) -> None:
     assert product_2.description == "512GB, Gray space"
     assert product_2.price == 210000.0
     assert product_2.quantity == 8
+
+
+def test_str_product(first_product):
+    assert str(first_product) == "Samsung SC4140V3A, 7376.0 руб. Остаток: 5 шт."
+
+
+def test_add_product(first_product, second_product):
+    assert first_product + second_product == 106879.90
