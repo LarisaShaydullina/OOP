@@ -16,6 +16,14 @@ def product_create():
     assert product.quantity == 5
 
 
+def product_create2():
+    product = Product("Колбаса", "Колбаса сыровяленая", 500.0, 10)
+    assert product.name == "Колбаса"
+    assert product.description == "Колбаса сыровяленая"
+    assert product.price == 500.0
+    assert product.quantity == 10
+
+
 def test_product_1_init(product_1: list) -> None:
     for i in product_1:
         for j in i["products"]:
@@ -42,3 +50,30 @@ def test_str_product(first_product):
 
 def test_add_product(first_product, second_product):
     assert first_product + second_product == 106879.90
+
+
+def test_price_init(capsys, first_product):
+    first_product.price = 0.0
+    meesage = capsys.readouterr()
+    assert (
+        meesage.out.strip().split("\n")[-1]
+        == "Цена не должна быть нулевая или отрицательная"
+    )
+
+    first_product.price = -1.0
+    meesage = capsys.readouterr()
+    assert meesage.out.strip() == "Цена не должна быть нулевая или отрицательная"
+
+    first_product.price = -500.0
+    meesage = capsys.readouterr()
+    assert meesage.out.strip() == "Цена не должна быть нулевая или отрицательная"
+
+
+def test_price_init3(capsys, first_product):
+    first_product.price = 10000
+    assert first_product.price == 10000
+
+
+def test_price_init4(capsys, first_product):
+    first_product.price = 9000
+    assert first_product.price == 9000

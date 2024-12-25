@@ -33,6 +33,3 @@ def test_repr_mixin4(capsys):
     LawnGrass("Газонная трава", "Спортивная", 789.0, 100, "Россия", "7 дней", "Зеленый")
     meesage = capsys.readouterr()
     assert meesage.out.strip() == "LawnGrass(Газонная трава, Спортивная, 789.0, 100)"
-
-
-
